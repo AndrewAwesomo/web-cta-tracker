@@ -10,7 +10,7 @@ import { interval } from 'rxjs';
 export class GetTrackerDataService {
 
 
-  readonly ROOT_URL = 'http://lapi.transitchicago.com/api/1.0/ttarrivals.aspx?key=';
+  readonly ROOT_URL = '/api/1.0/ttarrivals.aspx?key=';
 
   constructor(private http: HttpClient) { }
 

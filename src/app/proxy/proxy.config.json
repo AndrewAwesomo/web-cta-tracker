@@ -1,0 +1,7 @@
+{
+    "/api/*":{
+        "target":"http://lapi.transitchicago.com/",
+        "secure":false,
+        "logLevel":"debug"
+    }
+}
