@@ -15,8 +15,13 @@ export class MainViewerComponent implements OnInit {
   etas:any;
   subscr:Subscription;
   ngOnInit() {
-    var updateInterval = interval(30000); // 
-    this.subscr = updateInterval.subscribe(x => this.dataService.getPosts('41410').subscribe(data => this.parseData(data)));
+    var updateInterval = interval(30000);
+    this.callData();
+    updateInterval.subscribe(x => this.callData());
+  }
+
+  callData(){
+    this.subscr = this.dataService.getPosts('41410').subscribe(data => this.parseData(data));
   }
 
   parseData(data){
