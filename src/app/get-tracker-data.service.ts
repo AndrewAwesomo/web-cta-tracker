@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BusApiKey, TrainApiKey } from './configs/api-keys';
+import { interval } from 'rxjs';
 
 
 @Injectable({
@@ -16,7 +17,7 @@ export class GetTrackerDataService {
   getPosts(trainStation){
     var Url = this.ROOT_URL + TrainApiKey + '&mapid=' + trainStation + '&outputType=JSON';
     console.log('Fetching Data from: ' + Url);
-    return this.http.get(Url)
+    return this.http.get(Url);
   }
   
 }

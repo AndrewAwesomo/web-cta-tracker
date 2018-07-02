@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GetTrackerDataService } from '../get-tracker-data.service';
-import { Observable, interval } from 'rxjs';
+import { Observable, Subscription, interval } from 'rxjs';
 
 
 @Component({
@@ -13,21 +13,14 @@ export class MainViewerComponent implements OnInit {
   constructor(private dataService: GetTrackerDataService) { }
 
   etas:any;
-  subscr:Observable<any>;
+  subscr:Subscription;
   ngOnInit() {
-
-    // this.subscr = this.dataService.getPosts('41410').interval(1000).subscribe(
-    //   data => this.parseData(data)
-    // );
-
-    this.subscr = interval(1000).subscribe(this.dataService.getPosts('41410'))
+    var updateInterval = interval(30000); // 
+    this.subscr = updateInterval.subscribe(x => this.dataService.getPosts('41410').subscribe(data => this.parseData(data)));
   }
 
   parseData(data){
-    console.log(data['ctatt']['eta']);
-    this.etas = data['ctatt']['eta']
-    //console.log(JSON.parse(data[0]));
-    
+    this.etas = data['ctatt']['eta']    
   }
 
 
