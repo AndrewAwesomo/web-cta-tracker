@@ -30,13 +30,13 @@ export class MainViewerComponent implements OnInit {
 
   parseTrainData(data){
     this.trainEtas = data['ctatt']['eta'];
+    console.log(this.trainEtas);
   }
 
   parseBusData(data){
-    console.log(typeof data);
     this.busEtas = data;
     this.busEtas = xml2js(data)['__zone_symbol__value']['bustime-response']['prd'];
-    console.log(this.busEtas)
+    console.log(this.busEtas);
   }
 
   ngOnDestroy() {

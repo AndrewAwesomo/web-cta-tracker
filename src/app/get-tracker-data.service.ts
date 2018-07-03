@@ -3,17 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { BusApiKey, TrainApiKey } from './configs/api-keys';
 import { interval } from 'rxjs';
 
-
 @Injectable({
   providedIn: 'root'
 })
 export class GetTrackerDataService {
-
+  constructor(private http: HttpClient) { }
 
   readonly ROOT_URL_TRAIN = '/api/1.0/ttarrivals.aspx?key=';
   readonly ROOT_URL_BUS = '/bustime/api/v2/getpredictions?key='
-
-  constructor(private http: HttpClient) { }
 
   getPostsTrain(trainStation){
     var Url = this.ROOT_URL_TRAIN + TrainApiKey + '&mapid=' + trainStation + '&outputType=JSON';
@@ -22,15 +19,8 @@ export class GetTrackerDataService {
   }
 
   getPostsBus(busStation){
-    var Url = this.ROOT_URL_BUS + BusApiKey + '&stpid=' + busStation + '&outputType=JSON';
+    var Url = this.ROOT_URL_BUS + BusApiKey + '&stpid=' + busStation;
     console.log('Fetching Data from: ' + "http://www.ctabustracker.com/" + Url);
-    
-    //this.http.get(Url).subscribe(response => this.getData(response));
     return this.http.get(Url, {responseType: 'text'});
-  }
-
-  getData(res){
-    console.log(res.text());
-  }
-  
+  }  
 }
