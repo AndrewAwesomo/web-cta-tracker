@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GetTrackerDataService } from '../get-tracker-data.service';
 import { Observable, Subscription, interval } from 'rxjs';
-
+import * as xml2js from 'xml2js-es6-promise';
 
 @Component({
   selector: 'app-main-viewer',
@@ -12,24 +12,35 @@ export class MainViewerComponent implements OnInit {
 
   constructor(private dataService: GetTrackerDataService) { }
 
-  etas:any;
-  subscr:Subscription;
+  trainEtas:any;
+  busEtas:any;
+  subscrt:Subscription;
+  subscrb: Subscription;
+
   ngOnInit() {
     var updateInterval = interval(30000);
     this.callData();
     updateInterval.subscribe(x => this.callData());
   }
-
+  
   callData(){
-    this.subscr = this.dataService.getPosts('41410').subscribe(data => this.parseData(data));
+    this.subscrt = this.dataService.getPostsTrain('41410').subscribe(data => this.parseTrainData(data));
+    this.subscrb = this.dataService.getPostsBus('563').subscribe(data => this.parseBusData(data));
   }
 
-  parseData(data){
-    this.etas = data['ctatt']['eta']    
+  parseTrainData(data){
+    this.trainEtas = data['ctatt']['eta'];
   }
 
+  parseBusData(data){
+    console.log(typeof data);
+    this.busEtas = data;
+    this.busEtas = xml2js(data)['__zone_symbol__value']['bustime-response']['prd'];
+    console.log(this.busEtas)
+  }
 
   ngOnDestroy() {
-    this.subscr.unsubscribe();
+    this.subscrt.unsubscribe();
+    this.subscrb.unsubscribe();
   }
 }

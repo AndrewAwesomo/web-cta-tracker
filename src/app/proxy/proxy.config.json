@@ -3,5 +3,11 @@
         "target":"http://lapi.transitchicago.com/",
         "secure":false,
         "logLevel":"debug"
+    },
+
+    "/bustime/*":{
+        "target":"http://www.ctabustracker.com/",
+        "secure":false,
+        "logLevel":"debug"
     }
 }

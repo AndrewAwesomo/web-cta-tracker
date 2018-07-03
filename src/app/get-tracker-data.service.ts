@@ -10,14 +10,27 @@ import { interval } from 'rxjs';
 export class GetTrackerDataService {
 
 
-  readonly ROOT_URL = '/api/1.0/ttarrivals.aspx?key=';
+  readonly ROOT_URL_TRAIN = '/api/1.0/ttarrivals.aspx?key=';
+  readonly ROOT_URL_BUS = '/bustime/api/v2/getpredictions?key='
 
   constructor(private http: HttpClient) { }
 
-  getPosts(trainStation){
-    var Url = this.ROOT_URL + TrainApiKey + '&mapid=' + trainStation + '&outputType=JSON';
-    console.log('Fetching Data from: ' + Url);
+  getPostsTrain(trainStation){
+    var Url = this.ROOT_URL_TRAIN + TrainApiKey + '&mapid=' + trainStation + '&outputType=JSON';
+    console.log('Fetching Data from: ' + "http://lapi.transitchicago.com/" + Url);
     return this.http.get(Url);
+  }
+
+  getPostsBus(busStation){
+    var Url = this.ROOT_URL_BUS + BusApiKey + '&stpid=' + busStation + '&outputType=JSON';
+    console.log('Fetching Data from: ' + "http://www.ctabustracker.com/" + Url);
+    
+    //this.http.get(Url).subscribe(response => this.getData(response));
+    return this.http.get(Url, {responseType: 'text'});
+  }
+
+  getData(res){
+    console.log(res.text());
   }
   
 }

@@ -1,5 +1,10 @@
-<div *ngFor="let eta of etas">
+<div *ngFor="let eta of trainEtas">
     <!-- <div *ngIf="eta.destNm = 'O'Hare'"> -->
         {{eta.destNm}} --> {{eta.prdt}}
     <!-- </div> -->
 </div>
+
+<div *ngFor="let eta of busEtas">
+    {{eta.rtdd}} --> {{eta.stpnm}} --> {{eta.rtdir}} --> {{eta.des[0]}} --> {{eta.prdtm[0]}}
+</div>
+
