@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-const Muuri = require('muuri');
+import * as Muuri from 'muuri'
 
 @Component({
   selector: 'app-container',
@@ -12,7 +12,7 @@ export class ContainerComponent implements OnInit {
   ngOnInit() {
     var grid = new Muuri('.grid',{
       dragEnabled: true,
-      
+
     });
   }
 

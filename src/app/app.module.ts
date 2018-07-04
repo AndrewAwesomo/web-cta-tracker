@@ -6,15 +6,18 @@ import { AppComponent } from './app.component';
 import { MainViewerComponent } from './main-viewer/main-viewer.component';
 import { GetTrackerDataService } from './get-tracker-data.service';
 import { ContainerComponent } from './container/container.component';
+import { NavigationComponent } from './navigation/navigation.component';
+import { MaterialModule } from './material.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainViewerComponent,
-    ContainerComponent
+    ContainerComponent,
+    NavigationComponent
   ],
   imports: [
-    BrowserModule, HttpClientModule
+    BrowserModule, HttpClientModule, MaterialModule
   ],
   providers: [GetTrackerDataService],
   bootstrap: [AppComponent]

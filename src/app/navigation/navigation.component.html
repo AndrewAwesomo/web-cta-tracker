@@ -1,0 +1,7 @@
+<mat-form-field>
+  <mat-select placeholder="Bus Station">
+    <mat-option *ngFor="let station of busConfig" [value]="station.stop_name">
+      {{station.stop_desc}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
